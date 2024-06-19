@@ -136,3 +136,7 @@ declare type CreateUserParams = {
     hasDownload?: boolean;
     setIsTransforming?: React.Dispatch<React.SetStateAction<boolean>>;
   };
+  declare module 'qs' {
+    export function parse(str: string, options?: any): any;
+    export function stringify(obj: any, options?: any): string;
+  }
