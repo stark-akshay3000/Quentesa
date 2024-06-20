@@ -1,20 +1,21 @@
 /* eslint-disable no-unused-vars */
 
 // ====== USER PARAMS
-export interface CreateUserParams {
+export interface CreateUserParams  {
   clerkId: string;
   email: string;
-  firstName?: string;
-  lastName?: string;
-  [key: string]: any; // For any additional properties
-}
+  username: string;
+  firstName: string;
+  lastName: string;
+  photo: string;
+};
 
-export interface UpdateUserParams {
-  email?: string;
-  firstName?: string;
-  lastName?: string;
-  [key: string]: any; // For any additional properties
-}
+export interface UpdateUserParams  {
+  firstName: string;
+  lastName: string;
+  username: string;
+  photo: string;
+};
 
 // ====== IMAGE PARAMS
 declare type AddImageParams = {
@@ -95,7 +96,7 @@ declare type TransformationTypeKey =
   | "removeBackground";
 
 // ====== URL QUERY PARAMS
-declare type FormUrlQueryParams = {
+export interface FormUrlQueryParams {
   searchParams: string;
   key: string;
   value: string | number | null;
@@ -107,7 +108,7 @@ declare type UrlQueryParams = {
   value: string | null;
 };
 
-declare type RemoveUrlQueryParams = {
+export interface RemoveUrlQueryParams  {
   searchParams: string;
   keysToRemove: string[];
 };
