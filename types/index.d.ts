@@ -1,21 +1,20 @@
 /* eslint-disable no-unused-vars */
 
 // ====== USER PARAMS
-declare type CreateUserParams = {
+export interface CreateUserParams {
   clerkId: string;
   email: string;
-  username: string;
-  firstName: string | null; // Allow null values
-  lastName: string | null;  // Allow null values
-  photo: string;
-};
+  firstName?: string;
+  lastName?: string;
+  [key: string]: any; // For any additional properties
+}
 
-declare type UpdateUserParams = {
-  firstName?: string | null; // Make it optional
-  lastName?: string | null;  // Make it optional
-  username: string;
-  photo: string;
-};
+export interface UpdateUserParams {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  [key: string]: any; // For any additional properties
+}
 
 // ====== IMAGE PARAMS
 declare type AddImageParams = {
