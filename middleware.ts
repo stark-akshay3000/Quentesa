@@ -1,12 +1,23 @@
-// Import authMiddleware from Clerk SDK
-import { authMiddleware } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
-// Define authMiddleware configuration
-export default authMiddleware({
-  publicRoutes: ['/', '/api/webhooks/clerk', '/api/webhooks/stripe']
+// Define which routes are public (not protected)
+const isPublicRoute = createRouteMatcher([
+  '/sign-in(.*)',
+  '/sign-up(.*)',
+  '/api/clerk/webhook', // Add your webhook endpoint here
+]);
+
+export default clerkMiddleware((auth, request) => {
+  // Check if the request matches a public route
+  if (!isPublicRoute(request)) {
+    auth().protect(); // Protect routes that are not public
+  }
 });
 
-// Additional config for Next.js API routes
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: [
+    '/((?!.*\\..*|_next).*)', // Match all routes except those with a dot (likely static files) or _next
+    '/', // Match the root route
+    '/(api|trpc)(.*)', // Match any routes starting with /api or /trpc
+  ],
 };
